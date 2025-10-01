@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bprqetcgqfg8m"]
+
+[ext_resource type="Texture2D" uid="uid://ccxuhjlsigx7m" path="res://icon.svg" id="1_bwylf"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_oddfl"]
+[ext_resource type="PackedScene" uid="uid://b6vit0t28fv84" path="res://scenes/gun.tscn" id="3_x3dc1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdm8h"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eamgc"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_oddfl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bwylf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qdm8h")
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("RectangleShape2D_eamgc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
+[node name="cooldown" type="Timer" parent="."]
+process_callback = 0
+
+[node name="gun" parent="." instance=ExtResource("3_x3dc1")]
+
+[node name="dashtimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="shooting" from="gun" to="." method="_on_gun_shooting"]
+[connection signal="timeout" from="dashtimer" to="." method="_on_dashtimer_timeout"]

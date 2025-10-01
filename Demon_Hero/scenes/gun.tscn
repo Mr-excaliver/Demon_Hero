@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6vit0t28fv84"]
+
+[ext_resource type="Script" path="res://scripts/gun.gd" id="1_8sy6s"]
+[ext_resource type="Texture2D" uid="uid://ccxuhjlsigx7m" path="res://icon.svg" id="1_d4x04"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmlfn"]
+size = Vector2(74, 14)
+
+[node name="gun" type="Area2D"]
+script = ExtResource("1_8sy6s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 2.38419e-07)
+scale = Vector2(0.570313, 0.109375)
+texture = ExtResource("1_d4x04")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_qmlfn")
+
+[node name="Firerate" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(40, 0)
+
+[node name="reload" type="Timer" parent="."]
+
+[connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]
+[connection signal="timeout" from="reload" to="." method="_on_reload_timeout"]
