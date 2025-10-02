@@ -9,7 +9,7 @@ var motion = Vector2()
 var max_health = 5
 var current_health
 var dash_dir = 0 
-var dash_strength = 1500
+var dash_strength = 1700
 var is_dashing = false
 var can_dash  = true
 @onready var dashtimer = $dashtimer
@@ -17,7 +17,7 @@ var knockback_receiver = true
 var knockback_magnitude = 0.1
 @onready var hurtbox = $hurtbox/CollisionShape2D
 @onready var cooldown = $cooldown
-
+@onready var invinc = $invinc
 enum{
 	MOVE,
 	HIT
@@ -26,10 +26,8 @@ func _ready():
 	add_to_group("player")
 	current_health = max_health
 
-func _physics_process(delta):
-	if Input.is_action_just_pressed("die"):
-		queue_free()
-		emit_signal("died")
+func _physics_process(_delta):
+
 	match state:
 		MOVE:
 			movement()
@@ -44,6 +42,7 @@ func hit():
 	if current_health == 0:
 		emit_signal("health")
 		queue_free()
+	state = MOVE
 
 
 func movement():
@@ -100,3 +99,21 @@ func _on_gun_shooting(gun_knockback):
 
 func _on_dashtimer_timeout():
 	can_dash = true
+
+
+
+
+func _on_hurtbox_area_entered(area):
+	if area.name == "e_hitbox":
+		hurtbox.disabled = true
+		invinc.start()
+		var knockback_dir = (self.global_position - area.global_position).normalized()
+		var knockback_strength = knockback_magnitude * 1000
+		var knockback = knockback_dir * knockback_strength
+		global_position+= knockback
+		state = HIT
+		
+
+
+func _on_invinc_timeout():
+	hurtbox.disabled = false

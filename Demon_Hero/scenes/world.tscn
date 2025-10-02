@@ -1,7 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpfdj7kgsw0ns"]
+[gd_scene load_steps=3 format=3 uid="uid://cpfdj7kgsw0ns"]
 
 [ext_resource type="PackedScene" uid="uid://bprqetcgqfg8m" path="res://scenes/player.tscn" id="1_8exi8"]
+[ext_resource type="PackedScene" uid="uid://jffrh0lqd23i" path="res://scenes/spawners.tscn" id="2_gh1y0"]
 
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_8exi8")]
+position = Vector2(264, 141)
+
+[node name="spawners" parent="." instance=ExtResource("2_gh1y0")]
+position = Vector2(629, 352)

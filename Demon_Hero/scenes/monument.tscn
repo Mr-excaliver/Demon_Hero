@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://3nt80tpjvns7"]
+
+[ext_resource type="Script" path="res://scripts/Monument.gd" id="1_8oisy"]
+[ext_resource type="Texture2D" uid="uid://ccxuhjlsigx7m" path="res://icon.svg" id="2_4ibud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1u5l"]
+size = Vector2(117, 118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_023gr"]
+size = Vector2(118, 118)
+
+[node name="Monument" type="CharacterBody2D"]
+script = ExtResource("1_8oisy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4ibud")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 1)
+shape = SubResource("RectangleShape2D_w1u5l")
+
+[node name="mhurtbox" type="Area2D" parent="."]
+collision_layer = 258
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="mhurtbox"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_023gr")
+
+[node name="invinc" type="Timer" parent="."]
+
+[connection signal="area_entered" from="mhurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="invinc" to="." method="_on_invinc_timeout"]

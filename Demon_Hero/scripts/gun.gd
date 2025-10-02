@@ -14,9 +14,8 @@ var is_reloading = false
 var current_mag = magazine
 
 
-# warning-ignore:unused_argument
-func _physics_process(delta: float) -> void:
-	#mainbody.global_position = get_parent().get_node("gun_position").global_position
+func _physics_process(_delta: float) -> void:
+
 	var gun_rotation = mainbody.global_position.direction_to(get_global_mouse_position()).angle()
 	mainbody.rotation = gun_rotation
 	if Input.is_action_just_pressed("reload")&& current_mag < magazine && is_reloading == false:
@@ -36,7 +35,6 @@ func shoot():
 			can_fire = false
 		if can_fire == true && is_reloading == false:
 			emit_signal("shooting", gun_knockback)
-			#get_parent().get_parent().get_node("ScreenShake").screen_shake(0.5,4,100)
 			get_tree().current_scene.add_child(bullet)
 			current_mag-= 1
 			bullet_firerate.start()

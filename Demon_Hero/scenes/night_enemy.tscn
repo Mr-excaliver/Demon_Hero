@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://dx3ey3qchipw"]
+
+[ext_resource type="Texture2D" uid="uid://ccxuhjlsigx7m" path="res://icon.svg" id="1_604y7"]
+[ext_resource type="Script" path="res://scripts/night_enemy.gd" id="1_o243b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhthp"]
+size = Vector2(126, 126)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jy68i"]
+radius = 120.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2n5i6"]
+radius = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_beboc"]
+size = Vector2(124, 128)
+
+[node name="Night_enemy" type="CharacterBody2D"]
+script = ExtResource("1_o243b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_604y7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lhthp")
+
+[node name="detector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detector"]
+shape = SubResource("CircleShape2D_jy68i")
+
+[node name="e_hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="e_hitbox"]
+shape = SubResource("CircleShape2D_2n5i6")
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_beboc")
+
+[node name="attack" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="area_entered" from="detector" to="." method="_on_detector_area_entered"]
+[connection signal="area_exited" from="detector" to="." method="_on_detector_area_exited"]
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="attack" to="." method="_on_attack_timeout"]
