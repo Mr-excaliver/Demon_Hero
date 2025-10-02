@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
-@export var speed= 150
+var speed= EnemyStat.enemy_speed
 
 @onready var hitbox = $e_hitbox/CollisionShape2D
 @onready var atk_cooldown = $attack
 
+var base_score = 10
 var player
 var monument
-var health = 10
+var health = EnemyStat.enemy_health
 var state = CHASE
 var is_attacking = false
 
@@ -16,9 +17,6 @@ enum{
 	ATTACK,
 	IDLE
 }
-
-
-
 
 
 func _ready():
@@ -30,7 +28,7 @@ func _ready():
 func _physics_process(delta):
 
 	if health<=0:
-
+		ScoreManager.score += base_score * WaveManager.wave
 		queue_free()
 	match state:
 		CHASE:
@@ -91,4 +89,4 @@ func _on_detector_area_exited(area):
 func _on_hurtbox_area_entered(area):
 	if area.has_method("destroy"):
 		area.destroy()
-		health -=2
+		health -=PlayerStat.damage

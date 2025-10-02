@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
-
-var health = 50
-var gaurds = 0
+var base_score = 70
+var health = EnemyStat.spawner_health
+var gaurds = 4
 const enemy = preload("res://scenes/night_enemy.tscn")
 @onready var collection = $spawnpoints
 var spawn_points = []
-@onready var hurtbox = $mhurtbox/CollisionShape2D2
-@onready var invinc = $invinc
-@onready var cooldwon = $cooldown
+@onready var cooldown = $cooldown
+
+var buff_list = ["health", "speed", "mag_size" , "damage", "monument_health"]
 
 func _ready():
 	add_to_group("monument")
@@ -19,11 +19,13 @@ func _ready():
 
 
 func _process(_delta):
-	if health ==0:
+	if health <=0:
+		ScoreManager.score += base_score * WaveManager.wave
+		buff()
 		queue_free()
 	
 	if gaurds ==0:
-		spawn()
+		cooldown.start()
 	
 	
 
@@ -39,10 +41,19 @@ func spawn():
 
 func _on_hurtbox_area_entered(area):
 	if area.has_method("destroy"):
-		health -=10
+		health -=PlayerStat.damage
 		area.destroy()
 
 
 func _on_spawned_died():
 	gaurds -=1
 
+func buff():
+	var new_buff = buff_list[randi()%buff_list.size()]
+	var value = randi()%(10) * WaveManager.wave
+	PlayerStat.apply_buff(new_buff , value)
+
+
+
+func _on_cooldown_timeout():
+	spawn()

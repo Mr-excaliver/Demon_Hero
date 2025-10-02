@@ -2,14 +2,15 @@ extends CharacterBody2D
 
 
 signal died
-@export var speed= 150
+var speed= EnemyStat.enemy_speed
 
 @onready var hitbox = $e_hitbox/CollisionShape2D
 @onready var atk_cooldown = $attack
 
+var base_score = 50
 var player
 var monument
-var health = 10
+var health = EnemyStat.enemy_health
 var state = IDLE
 var is_attacking = false
 var initial_pos
@@ -32,6 +33,7 @@ func _ready():
 func _physics_process(_delta):
 
 	if health<=0:
+		ScoreManager.score += base_score * WaveManager.wave
 		emit_signal("died")
 		queue_free()
 	match state:
@@ -89,7 +91,7 @@ func _on_attack_timeout():
 func _on_hurtbox_area_entered(area):
 	if area.has_method("destroy"):
 		area.destroy()
-		health -=2
+		health -=PlayerStat.damage
 
 
 func _on_detector_area_entered(_area):

@@ -2,11 +2,11 @@ extends CharacterBody2D
 signal health
 signal died
 var state = MOVE
-const MAX_SPEED = 300.0
+var MAX_SPEED = PlayerStat.speed
 const ACCELERATION = 30
 const JUMP_VELOCITY = -400.0
 var motion = Vector2()
-var max_health = 5
+var max_health = PlayerStat.health
 var current_health
 var dash_dir = 0 
 var dash_strength = 1700
@@ -25,6 +25,9 @@ enum{
 func _ready():
 	add_to_group("player")
 	current_health = max_health
+	PlayerStat.health_change.connect(health_update)
+	PlayerStat.speed_change.connect(speed_update)
+	
 
 func _physics_process(_delta):
 
@@ -38,7 +41,7 @@ func _physics_process(_delta):
 	motion = velocity
 
 func hit():
-	current_health -= 1
+	current_health -= EnemyStat.enemy_damage
 	if current_health == 0:
 		emit_signal("health")
 		queue_free()
@@ -82,9 +85,11 @@ func movement():
 	move_and_slide()
 
 
+func health_update(new_health):
+	max_health = new_health
 
-
-
+func speed_update(new_speed):
+	MAX_SPEED = new_speed
 
 
 func _on_gun_shooting(gun_knockback):
@@ -99,6 +104,7 @@ func _on_gun_shooting(gun_knockback):
 
 func _on_dashtimer_timeout():
 	can_dash = true
+
 
 
 

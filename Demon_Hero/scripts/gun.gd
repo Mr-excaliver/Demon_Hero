@@ -9,11 +9,13 @@ const BULLET = preload("res://scenes/bullet.tscn")
 @onready var bullet_firerate = $Firerate
 @onready var reload = $reload
 var can_fire = true
-@export var magazine = 30
+var magazine = PlayerStat.mag_size
 var is_reloading = false
 var current_mag = magazine
 
 
+func _ready():
+	PlayerStat.mag_change.connect(mag_size_update)
 func _physics_process(_delta: float) -> void:
 
 	var gun_rotation = mainbody.global_position.direction_to(get_global_mouse_position()).angle()
@@ -51,3 +53,6 @@ func _on_reload_timeout():
 
 func _on_firerate_timeout():
 	can_fire = true
+
+func mag_size_update(mag):
+	magazine = mag
