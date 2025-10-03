@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal destroyed
+
 var health = PlayerStat.monument_health
 @onready var hurtbox = $mhurtbox/CollisionShape2D2
 @onready var invinc = $invinc
@@ -7,11 +9,14 @@ var health = PlayerStat.monument_health
 func _ready():
 	add_to_group("monument")
 	PlayerStat.monu_change.connect(health_change)
+	self.destroyed.connect(WaveManager.game_over)
 
 
 func _process(_delta):
-	if health ==0:
+	if health <=0:
+		emit_signal("destroyed")
 		queue_free()
+		
 
 
 

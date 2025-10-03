@@ -1,5 +1,4 @@
 extends CharacterBody2D
-signal health
 signal died
 var state = MOVE
 var MAX_SPEED = PlayerStat.speed
@@ -27,6 +26,7 @@ func _ready():
 	current_health = max_health
 	PlayerStat.health_change.connect(health_update)
 	PlayerStat.speed_change.connect(speed_update)
+	self.died.connect(WaveManager.player_died)
 	
 
 func _physics_process(_delta):
@@ -42,8 +42,9 @@ func _physics_process(_delta):
 
 func hit():
 	current_health -= EnemyStat.enemy_damage
-	if current_health == 0:
-		emit_signal("health")
+	if current_health <= 0:
+		PlayerStat.died_count +=1
+		emit_signal("died")
 		queue_free()
 	state = MOVE
 

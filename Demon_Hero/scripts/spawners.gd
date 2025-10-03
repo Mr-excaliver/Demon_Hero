@@ -11,7 +11,7 @@ var spawn_points = []
 var buff_list = ["health", "speed", "mag_size" , "damage", "monument_health"]
 
 func _ready():
-	add_to_group("monument")
+	add_to_group("Spawners")
 	for i in collection.get_children():
 		if i is Marker2D:
 			spawn_points.append(i)

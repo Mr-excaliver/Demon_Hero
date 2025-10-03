@@ -10,7 +10,7 @@ var speed = 500
 var mag_size = 10
 var damage = 10
 var monument_health = 50
-
+var died_count = 0
 
 func apply_buff(buff , value):
 	match buff:
@@ -36,3 +36,4 @@ func reset():
 	mag_size = 10
 	damage = 10
 	monument_health = 50
+	died_count = 0
