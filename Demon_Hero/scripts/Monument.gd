@@ -36,3 +36,7 @@ func _on_invinc_timeout():
 
 func health_change(new_health):
 	health = new_health
+
+
+func remove():
+	queue_free()

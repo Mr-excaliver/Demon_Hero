@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 var base_score = 70
 var health = EnemyStat.spawner_health
-var gaurds = 4
+var can_spawn = true
 const enemy = preload("res://scenes/night_enemy.tscn")
 @onready var collection = $spawnpoints
-var spawn_points = []
+var spawn_point = []
 @onready var cooldown = $cooldown
 
 var buff_list = ["health", "speed", "mag_size" , "damage", "monument_health"]
@@ -14,8 +14,8 @@ func _ready():
 	add_to_group("Spawners")
 	for i in collection.get_children():
 		if i is Marker2D:
-			spawn_points.append(i)
-	
+			spawn_point.append(i)
+
 
 
 func _process(_delta):
@@ -23,20 +23,17 @@ func _process(_delta):
 		ScoreManager.score += base_score * WaveManager.wave
 		buff()
 		queue_free()
-	
-	if gaurds ==0:
-		cooldown.start()
-	
-	
+	if can_spawn:
+		spawn()
 
 
 func spawn():
-	for i in spawn_points:
+	can_spawn = false
+	for i in spawn_point:
 		var enem = enemy.instantiate()
 		enem.global_position = i.global_position
 		get_tree().current_scene.add_child(enem)
-		gaurds +=1
-		enem.died.connect(_on_spawned_died.bind())
+
 
 
 func _on_hurtbox_area_entered(area):
@@ -45,8 +42,7 @@ func _on_hurtbox_area_entered(area):
 		area.destroy()
 
 
-func _on_spawned_died():
-	gaurds -=1
+
 
 func buff():
 	var new_buff = buff_list[randi()%buff_list.size()]
@@ -55,5 +51,3 @@ func buff():
 
 
 
-func _on_cooldown_timeout():
-	spawn()

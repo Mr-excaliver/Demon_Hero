@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 
-signal died
 var speed= EnemyStat.enemy_speed
 
 @onready var hitbox = $e_hitbox/CollisionShape2D
@@ -11,10 +10,10 @@ var base_score = 50
 var player
 var monument
 var health = EnemyStat.enemy_health
-var state = IDLE
+var state = State.IDLE
 var is_attacking = false
 var initial_pos
-enum{
+enum State{
 	CHASE,
 	ATTACK,
 	IDLE
@@ -25,23 +24,22 @@ enum{
 
 
 func _ready():
-	add_to_group("enemies")
+	add_to_group("N_enemies")
 	player = get_tree().get_first_node_in_group("player")
 	initial_pos = self.global_position
 
 
 func _physics_process(_delta):
-
 	if health<=0:
+
 		ScoreManager.score += base_score * WaveManager.wave
-		emit_signal("died")
 		queue_free()
 	match state:
-		CHASE:
+		State.CHASE:
 			chase()
-		ATTACK:
+		State.ATTACK:
 			attack()
-		IDLE:
+		State.IDLE:
 			idle()
 	
 	move_and_slide()
@@ -51,12 +49,12 @@ func _physics_process(_delta):
 func chase():
 
 	if not player:
-		state = IDLE
+		state = State.IDLE
 	else:
 		if (player.global_position - initial_pos).length() < 600 or (player.global_position - self.global_position).length() < 500:
 			velocity = speed * (player.global_position - self.global_position).normalized()
 		else :
-			state = IDLE
+			state = State.IDLE
 
 
 func idle():
@@ -66,7 +64,7 @@ func idle():
 			self.global_position.y = move_toward(self.global_position.y , initial_pos.y , 5)
 	else:
 		if (player.global_position - initial_pos).length() < 600 or (player.global_position - self.global_position).length() < 500:
-			state = CHASE
+			state = State.CHASE
 		else:
 			if self.global_position != initial_pos:
 				self.global_position.x = move_toward(self.global_position.x , initial_pos.x , 5)
@@ -95,10 +93,10 @@ func _on_hurtbox_area_entered(area):
 
 
 func _on_detector_area_entered(_area):
-	state = ATTACK
+	state = State.ATTACK
 
 
 func _on_detector_area_exited(area):
 	if area.name == "mhurtbox":
-		state = IDLE
-	state = CHASE
+		state = State.IDLE
+	state = State.CHASE

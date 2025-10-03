@@ -1,6 +1,6 @@
 extends CharacterBody2D
 signal died
-var state = MOVE
+var state = State.MOVE
 var MAX_SPEED = PlayerStat.speed
 const ACCELERATION = 30
 const JUMP_VELOCITY = -400.0
@@ -17,7 +17,7 @@ var knockback_magnitude = 0.1
 @onready var hurtbox = $hurtbox/CollisionShape2D
 @onready var cooldown = $cooldown
 @onready var invinc = $invinc
-enum{
+enum State{
 	MOVE,
 	HIT
 }
@@ -32,9 +32,9 @@ func _ready():
 func _physics_process(_delta):
 
 	match state:
-		MOVE:
+		State.MOVE:
 			movement()
-		HIT:
+		State.HIT:
 			hit()
 	set_velocity(motion)
 	move_and_slide()
@@ -46,7 +46,7 @@ func hit():
 		PlayerStat.died_count +=1
 		emit_signal("died")
 		queue_free()
-	state = MOVE
+	state = State.MOVE
 
 
 func movement():
@@ -118,7 +118,7 @@ func _on_hurtbox_area_entered(area):
 		var knockback_strength = knockback_magnitude * 1000
 		var knockback = knockback_dir * knockback_strength
 		global_position+= knockback
-		state = HIT
+		state = State.HIT
 		
 
 

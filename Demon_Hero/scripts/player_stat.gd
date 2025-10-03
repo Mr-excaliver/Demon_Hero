@@ -8,7 +8,7 @@ signal monu_change
 var health = 10
 var speed = 500
 var mag_size = 10
-var damage = 10
+var damage = 5
 var monument_health = 50
 var died_count = 0
 

@@ -39,8 +39,4 @@ position = Vector2(-300, 0)
 [node name="Marker2D4" type="Marker2D" parent="spawnpoints"]
 position = Vector2(300, 0)
 
-[node name="cooldown" type="Timer" parent="."]
-wait_time = 0.6
-
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

@@ -1,0 +1,26 @@
+extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_quit_button_down():
+	get_tree().quit()
+
+
+func _on_start_button_down():
+	WaveManager.phase = 1
+	WaveManager.start_game()
+	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	
+
+
+func _on_leaderboard_button_down():
+	get_tree().change_scene_to_file("res://ui_scenes/leaderboard.tscn")

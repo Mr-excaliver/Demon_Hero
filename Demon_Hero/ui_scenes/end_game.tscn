@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnsllfsu30234"]
+
+[ext_resource type="Script" path="res://ui_scripts/end_game.gd" id="1_owop0"]
+
+[node name="End_game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_owop0")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.00308642
+anchor_right = 1.0
+anchor_bottom = 0.518519
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOUR SCORE :
+NULL"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.385417
+anchor_top = 0.476852
+anchor_right = 0.612847
+anchor_bottom = 0.524691
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="submit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.460938
+anchor_top = 0.532407
+anchor_right = 0.539063
+anchor_bottom = 0.570988
+grow_horizontal = 2
+grow_vertical = 2
+text = "SUBMIT"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_down" from="submit" to="." method="_on_submit_button_down"]

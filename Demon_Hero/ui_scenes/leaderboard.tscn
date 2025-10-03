@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://crkmjd42fu65"]
+
+[ext_resource type="Script" path="res://ui_scripts/leaderboard.gd" id="1_8npyn"]
+
+[node name="leaderboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8npyn")
+
+[node name="main_menu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.305556
+anchor_top = 0.858025
+anchor_right = 0.657118
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "MAIN MENU"
+
+[node name="highscores" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33941
+anchor_top = -0.00154321
+anchor_right = 0.613715
+anchor_bottom = 0.112654
+grow_horizontal = 2
+text = "HIGHSCORES"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.3125
+anchor_top = 0.135802
+anchor_right = 0.644097
+anchor_bottom = 0.816358
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_down" from="main_menu" to="." method="_on_main_menu_button_down"]

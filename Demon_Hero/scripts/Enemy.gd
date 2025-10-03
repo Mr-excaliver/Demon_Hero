@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal enemy_died
 var speed= EnemyStat.enemy_speed
 
 @onready var hitbox = $e_hitbox/CollisionShape2D
@@ -9,10 +10,10 @@ var base_score = 10
 var player
 var monument
 var health = EnemyStat.enemy_health
-var state = CHASE
+var state = State.CHASE
 var is_attacking = false
 
-enum{
+enum State{
 	CHASE,
 	ATTACK,
 	IDLE
@@ -23,19 +24,21 @@ func _ready():
 	add_to_group("enemies")
 	player = get_tree().get_first_node_in_group("player")
 	monument = get_tree().get_first_node_in_group("monument")
+	self.enemy_died.connect(WaveManager.day_enemy_died)
 
 
 func _physics_process(delta):
 
 	if health<=0:
+		emit_signal("enemy_died")
 		ScoreManager.score += base_score * WaveManager.wave
 		queue_free()
 	match state:
-		CHASE:
+		State.CHASE:
 			chase()
-		ATTACK:
+		State.ATTACK:
 			attack()
-		IDLE:
+		State.IDLE:
 			idle()
 	
 	move_and_slide()
@@ -44,7 +47,7 @@ func _physics_process(delta):
 
 func chase():
 	if not monument:
-		state = IDLE
+		state = State.IDLE
 		return
 	if not player:
 		velocity = speed * (monument.global_position - self.global_position).normalized()
@@ -71,7 +74,7 @@ func attack():
 
 
 func _on_detector_area_entered(area):
-	state = ATTACK
+	state = State.ATTACK
 
 
 
@@ -82,8 +85,8 @@ func _on_attack_timeout():
 
 func _on_detector_area_exited(area):
 	if area.name == "mhurtbox":
-		state = IDLE
-	state = CHASE
+		state = State.IDLE
+	state = State.CHASE
 
 
 func _on_hurtbox_area_entered(area):
