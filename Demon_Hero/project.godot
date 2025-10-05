@@ -22,6 +22,12 @@ PlayerStat="*res://scripts/player_stat.gd"
 ScoreManager="*res://scripts/score_manager.gd"
 EnemyStat="*res://scripts/enemy_stat.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+mouse_cursor/custom_image="res://assests/mouse.png"
+
 [input]
 
 up={
@@ -67,5 +73,6 @@ dash={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

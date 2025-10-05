@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bprqetcgqfg8m"]
+[gd_scene load_steps=7 format=3 uid="uid://bprqetcgqfg8m"]
 
-[ext_resource type="Texture2D" uid="uid://ccxuhjlsigx7m" path="res://icon.svg" id="1_bwylf"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_oddfl"]
+[ext_resource type="Texture2D" uid="uid://b0u5a8ba7u3hs" path="res://assests/player.png" id="2_fix78"]
 [ext_resource type="PackedScene" uid="uid://b6vit0t28fv84" path="res://scenes/gun.tscn" id="3_x3dc1"]
+[ext_resource type="Texture2D" uid="uid://blfgq8smg1ojg" path="res://assests/arrow.png" id="4_0hp1r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdm8h"]
 size = Vector2(128, 128)
@@ -14,7 +15,9 @@ size = Vector2(128, 128)
 script = ExtResource("1_oddfl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_bwylf")
+position = Vector2(-40, 6.00001)
+scale = Vector2(5.875, 4.85937)
+texture = ExtResource("2_fix78")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qdm8h")
@@ -38,6 +41,12 @@ wait_time = 0.1
 
 [node name="invinc" type="Timer" parent="."]
 wait_time = 0.6
+
+[node name="navigator" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="navigator"]
+position = Vector2(119, 0)
+texture = ExtResource("4_0hp1r")
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

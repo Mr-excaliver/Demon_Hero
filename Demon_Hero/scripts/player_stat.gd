@@ -5,6 +5,9 @@ signal speed_change
 signal mag_change
 signal monu_change
 
+signal took_damage
+signal mag_amt
+
 var health = 10
 var speed = 500
 var mag_size = 10
@@ -37,3 +40,9 @@ func reset():
 	damage = 10
 	monument_health = 50
 	died_count = 0
+
+func player_damaged(new_health):
+	emit_signal("took_damage", new_health)
+	
+func fired(mag):
+	emit_signal("mag_amt", mag)

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 signal died
+signal took_damage
 var state = State.MOVE
 var MAX_SPEED = PlayerStat.speed
 const ACCELERATION = 30
@@ -30,6 +31,16 @@ func _ready():
 	
 
 func _physics_process(_delta):
+	if WaveManager.phase == WaveManager.Phase.DAY:
+		var monum = get_tree().get_first_node_in_group("monument")
+		var angle = (monum.global_position - self.global_position).angle()
+		$navigator.rotation = angle
+
+	elif WaveManager.phase == WaveManager.Phase.NIGHT:
+		var spawns = get_tree().get_first_node_in_group("Spawners")
+		if spawns:
+			var angle = (spawns.global_position - self.global_position).angle()
+			$navigator.rotation = angle
 
 	match state:
 		State.MOVE:
@@ -42,10 +53,11 @@ func _physics_process(_delta):
 
 func hit():
 	current_health -= EnemyStat.enemy_damage
+	PlayerStat.player_damaged(current_health)
 	if current_health <= 0:
 		PlayerStat.died_count +=1
 		emit_signal("died")
-		queue_free()
+		call_deferred("queue_free")
 	state = State.MOVE
 
 
@@ -88,6 +100,8 @@ func movement():
 
 func health_update(new_health):
 	max_health = new_health
+	current_health = max_health
+	PlayerStat.player_damaged(current_health)
 
 func speed_update(new_speed):
 	MAX_SPEED = new_speed
@@ -112,7 +126,7 @@ func _on_dashtimer_timeout():
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "e_hitbox":
-		hurtbox.disabled = true
+		hurtbox.set_deferred("disabled", true)
 		invinc.start()
 		var knockback_dir = (self.global_position - area.global_position).normalized()
 		var knockback_strength = knockback_magnitude * 1000

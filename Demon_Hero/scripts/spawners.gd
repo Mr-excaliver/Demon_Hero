@@ -6,7 +6,7 @@ var can_spawn = true
 const enemy = preload("res://scenes/night_enemy.tscn")
 @onready var collection = $spawnpoints
 var spawn_point = []
-@onready var cooldown = $cooldown
+
 
 var buff_list = ["health", "speed", "mag_size" , "damage", "monument_health"]
 
@@ -21,6 +21,7 @@ func _ready():
 func _process(_delta):
 	if health <=0:
 		ScoreManager.score += base_score * WaveManager.wave
+		ScoreManager.score_updated()
 		buff()
 		queue_free()
 	if can_spawn:

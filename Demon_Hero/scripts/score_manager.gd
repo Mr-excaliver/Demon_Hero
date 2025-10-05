@@ -1,12 +1,13 @@
 extends Node
 
+signal score_update
+
 var score = 0
 
 var score_list = []
 
 
-func _ready():
-	load_list()
+
 
 func score_list_updated():
 	score_list.sort_custom(sort_dec)
@@ -35,3 +36,6 @@ func load_list():
 		var json_text = file.get_as_text()
 		var parsed_text = JSON.parse_string(json_text)
 		score_list = parsed_text.result
+
+func score_updated():
+	emit_signal("score_update")

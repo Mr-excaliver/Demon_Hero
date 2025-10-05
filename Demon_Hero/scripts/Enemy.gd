@@ -32,6 +32,7 @@ func _physics_process(delta):
 	if health<=0:
 		emit_signal("enemy_died")
 		ScoreManager.score += base_score * WaveManager.wave
+		ScoreManager.score_updated()
 		queue_free()
 	match state:
 		State.CHASE:

@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5xwworve4e7d"]
+
+[ext_resource type="Script" path="res://ui_scripts/ui.gd" id="1_5drgr"]
+[ext_resource type="Texture2D" uid="uid://b5ear0mfioott" path="res://assests/health_border.png" id="1_tueew"]
+[ext_resource type="Texture2D" uid="uid://yokimh4g10fs" path="res://assests/health_fill.png" id="2_pcs7p"]
+[ext_resource type="Texture2D" uid="uid://b1hkp12nulrg8" path="res://assests/health_back.png" id="3_7owhi"]
+[ext_resource type="Texture2D" uid="uid://dfqcr308avnci" path="res://assests/bullet.png" id="4_hs7sc"]
+[ext_resource type="Texture2D" uid="uid://3yqdhfw47iwp" path="res://assests/kunai_counter.png" id="5_4l1pm"]
+[ext_resource type="FontFile" uid="uid://bpvbu7mybxpyt" path="res://assests/Minecraft.ttf" id="6_fpatb"]
+
+[node name="ui" type="Control"]
+layout_mode = 3
+anchor_left = -0.000868056
+anchor_top = -0.00308642
+anchor_right = 0.999132
+anchor_bottom = 0.996914
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5drgr")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 58.0
+offset_bottom = 13.0
+scale = Vector2(6, 6)
+texture_under = ExtResource("1_tueew")
+texture_over = ExtResource("2_pcs7p")
+texture_progress = ExtResource("3_7owhi")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0104167
+anchor_top = 0.162037
+anchor_right = 0.146718
+anchor_bottom = 0.162037
+offset_right = -117.019
+offset_bottom = 64.0
+rotation = -0.785398
+scale = Vector2(2, 2)
+texture = ExtResource("4_hs7sc")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0789931
+anchor_top = 0.131173
+anchor_right = 0.109375
+anchor_bottom = 0.180556
+offset_right = 35.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_4l1pm")
+metadata/_edit_use_anchors_ = true
+
+[node name="mag" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.115451
+anchor_top = 0.108025
+anchor_right = 0.179688
+anchor_bottom = 0.214506
+theme_override_fonts/font = ExtResource("6_fpatb")
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448351
+anchor_right = 0.551649
+anchor_bottom = 0.100309
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_fpatb")
+theme_override_font_sizes/font_size = 30
+text = "SCORE:
+0"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="WAVE" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 456.0
+offset_top = 119.0
+offset_right = 599.0
+offset_bottom = 209.0
+theme_override_fonts/font = ExtResource("6_fpatb")
+theme_override_font_sizes/font_size = 50
+text = "WAVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="wave_timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="wave_timer" to="." method="_on_wave_timer_timeout"]

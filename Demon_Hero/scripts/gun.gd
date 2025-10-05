@@ -39,6 +39,7 @@ func shoot():
 			emit_signal("shooting", gun_knockback)
 			get_tree().current_scene.add_child(bullet)
 			current_mag-= 1
+			PlayerStat.fired(current_mag)
 			bullet_firerate.start()
 			can_fire = false
 			bullet.global_position = holder.global_position
@@ -49,6 +50,7 @@ func shoot():
 
 func _on_reload_timeout():
 	is_reloading = false
+	PlayerStat.fired(current_mag)
 
 
 func _on_firerate_timeout():

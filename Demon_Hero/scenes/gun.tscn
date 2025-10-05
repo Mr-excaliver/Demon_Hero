@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://b6vit0t28fv84"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_8sy6s"]
-[ext_resource type="Texture2D" uid="uid://ccxuhjlsigx7m" path="res://icon.svg" id="1_d4x04"]
+[ext_resource type="Texture2D" uid="uid://i15brht52wue" path="res://assests/gun.png" id="2_od7n2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmlfn"]
-size = Vector2(74, 14)
+size = Vector2(110, 13)
 
 [node name="gun" type="Area2D"]
 collision_layer = 0
@@ -12,19 +12,19 @@ collision_mask = 0
 script = ExtResource("1_8sy6s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1, 2.38419e-07)
-scale = Vector2(0.570313, 0.109375)
-texture = ExtResource("1_d4x04")
+position = Vector2(0, 10)
+scale = Vector2(1.95313, 1.26562)
+texture = ExtResource("2_od7n2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
+position = Vector2(3, 0.5)
 shape = SubResource("RectangleShape2D_qmlfn")
 
 [node name="Firerate" type="Timer" parent="."]
 wait_time = 0.1
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(40, 0)
+position = Vector2(63, 0)
 
 [node name="reload" type="Timer" parent="."]
 

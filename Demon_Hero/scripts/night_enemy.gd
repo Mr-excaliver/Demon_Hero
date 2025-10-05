@@ -33,6 +33,7 @@ func _physics_process(_delta):
 	if health<=0:
 
 		ScoreManager.score += base_score * WaveManager.wave
+		ScoreManager.score_updated()
 		queue_free()
 	match state:
 		State.CHASE:

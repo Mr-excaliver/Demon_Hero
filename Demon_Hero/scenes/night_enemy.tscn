@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dx3ey3qchipw"]
 
-[ext_resource type="Texture2D" uid="uid://ccxuhjlsigx7m" path="res://icon.svg" id="1_604y7"]
 [ext_resource type="Script" path="res://scripts/night_enemy.gd" id="1_o243b"]
+[ext_resource type="Texture2D" uid="uid://ddjljm130icsf" path="res://assests/n_enemy.png" id="2_gdana"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhthp"]
 size = Vector2(126, 126)
@@ -19,7 +19,9 @@ size = Vector2(124, 128)
 script = ExtResource("1_o243b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_604y7")
+position = Vector2(-1, 0)
+scale = Vector2(3.5625, 3.60938)
+texture = ExtResource("2_gdana")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lhthp")

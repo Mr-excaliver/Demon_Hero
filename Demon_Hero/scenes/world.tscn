@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpfdj7kgsw0ns"]
+[gd_scene load_steps=5 format=3 uid="uid://cpfdj7kgsw0ns"]
 
 [ext_resource type="PackedScene" uid="uid://bprqetcgqfg8m" path="res://scenes/player.tscn" id="1_8exi8"]
+[ext_resource type="PackedScene" uid="uid://c5xwworve4e7d" path="res://ui_scenes/ui.tscn" id="1_ic1tr"]
 [ext_resource type="PackedScene" uid="uid://3nt80tpjvns7" path="res://scenes/monument.tscn" id="2_u0e3w"]
+[ext_resource type="PackedScene" uid="uid://bf8qn76xyghxl" path="res://ui_scenes/tile_map.tscn" id="4_gaodq"]
 
 [node name="World" type="Node2D"]
 
@@ -10,3 +12,18 @@ position = Vector2(1000, 750)
 
 [node name="Monument" parent="." instance=ExtResource("2_u0e3w")]
 position = Vector2(1000, 1000)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ui" parent="CanvasLayer" instance=ExtResource("1_ic1tr")]
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = 2.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_mirroring = Vector2(1152, 640)
+
+[node name="TileMap" parent="CanvasLayer/ParallaxBackground/ParallaxLayer" instance=ExtResource("4_gaodq")]

@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnsllfsu30234"]
+[gd_scene load_steps=8 format=3 uid="uid://bnsllfsu30234"]
 
 [ext_resource type="Script" path="res://ui_scripts/end_game.gd" id="1_owop0"]
+[ext_resource type="Texture2D" uid="uid://djmf8hgryh2v8" path="res://assests/background.png" id="2_ri374"]
+[ext_resource type="Texture2D" uid="uid://doodxmqxx4dp" path="res://assests/ui_interface_outlet.png" id="3_i1lcm"]
+[ext_resource type="FontFile" uid="uid://bpvbu7mybxpyt" path="res://assests/Minecraft.ttf" id="4_ls7i8"]
+[ext_resource type="Texture2D" uid="uid://c41tgee38ptad" path="res://assests/button.png" id="5_fnl8u"]
+[ext_resource type="Texture2D" uid="uid://dikie3libnkbq" path="res://assests/button_hover.png" id="6_tlhdg"]
+[ext_resource type="Texture2D" uid="uid://bgxlsopa44e0g" path="res://assests/button_down.png" id="7_cns3i"]
 
 [node name="End_game" type="Control"]
 layout_mode = 3
@@ -12,6 +18,21 @@ grow_vertical = 2
 script = ExtResource("1_owop0")
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2_ri374")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -124.0
+offset_top = -111.0
+offset_right = 1287.0
+offset_bottom = 710.0
+texture = ExtResource("3_i1lcm")
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -20,6 +41,8 @@ anchor_right = 1.0
 anchor_bottom = 0.518519
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_ls7i8")
+theme_override_font_sizes/font_size = 100
 text = "YOUR SCORE :
 NULL"
 horizontal_alignment = 1
@@ -29,24 +52,39 @@ metadata/_edit_use_anchors_ = true
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.385417
-anchor_top = 0.476852
-anchor_right = 0.612847
-anchor_bottom = 0.524691
+anchor_left = 0.361111
+anchor_top = 0.464506
+anchor_right = 0.639757
+anchor_bottom = 0.54321
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_ls7i8")
 metadata/_edit_use_anchors_ = true
 
-[node name="submit" type="Button" parent="."]
+[node name="submit" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.460938
-anchor_top = 0.532407
-anchor_right = 0.539063
-anchor_bottom = 0.570988
+anchor_left = 0.415799
+anchor_top = 0.566358
+anchor_right = 0.586806
+anchor_bottom = 0.683642
 grow_horizontal = 2
 grow_vertical = 2
+texture_normal = ExtResource("5_fnl8u")
+texture_pressed = ExtResource("6_tlhdg")
+texture_hover = ExtResource("7_cns3i")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="submit"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_fonts/font = ExtResource("4_ls7i8")
+theme_override_font_sizes/font_size = 30
 text = "SUBMIT"
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="button_down" from="submit" to="." method="_on_submit_button_down"]
