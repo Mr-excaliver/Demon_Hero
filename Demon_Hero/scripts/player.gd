@@ -35,9 +35,11 @@ func _physics_process(_delta):
 	if WaveManager.phase == WaveManager.Phase.DAY:
 		var monum = get_tree().get_first_node_in_group("monument")
 		var angle = (monum.global_position - self.global_position).angle()
+		$Sprite2D.modulate = Color(1,1,1)
 		$navigator.rotation = angle
 
 	elif WaveManager.phase == WaveManager.Phase.NIGHT:
+		$Sprite2D.modulate = Color(1,0,1)
 		var spawns = get_tree().get_first_node_in_group("Spawners")
 		if spawns:
 			var angle = (spawns.global_position - self.global_position).angle()
