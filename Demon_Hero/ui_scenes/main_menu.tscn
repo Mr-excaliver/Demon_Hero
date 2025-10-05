@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dikie3libnkbq" path="res://assests/button_hover.png" id="4_xxnhx"]
 [ext_resource type="Texture2D" uid="uid://bgxlsopa44e0g" path="res://assests/button_down.png" id="5_hsces"]
 [ext_resource type="Texture2D" uid="uid://vejjrbctlerl" path="res://assests/logo.png" id="6_64oq1"]
-[ext_resource type="FontFile" uid="uid://bpvbu7mybxpyt" path="res://assests/Minecraft.ttf" id="6_qm4mg"]
+[ext_resource type="FontFile" uid="uid://bpvbu7mybxpyt" path="res://score/Minecraft.ttf" id="6_qm4mg"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3

@@ -41,7 +41,10 @@ func _physics_process(_delta):
 		if spawns:
 			var angle = (spawns.global_position - self.global_position).angle()
 			$navigator.rotation = angle
-
+	if self.global_position.x > get_global_mouse_position().x:
+		$gun/Sprite2D.flip_v = true
+	else:
+		$gun/Sprite2D.flip_v = false
 	match state:
 		State.MOVE:
 			movement()
@@ -100,7 +103,7 @@ func movement():
 
 func health_update(new_health):
 	max_health = new_health
-	current_health = max_health
+	current_health = PlayerStat.health
 	PlayerStat.player_damaged(current_health)
 
 func speed_update(new_speed):

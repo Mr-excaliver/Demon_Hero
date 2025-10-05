@@ -23,6 +23,7 @@ func _process(delta):
 
 func health_update(health):
 	Bar.max_value = health
+	Bar.value = health
 	
 
 func health_value(health):

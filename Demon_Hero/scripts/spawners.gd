@@ -19,10 +19,13 @@ func _ready():
 
 
 func _process(_delta):
-	if health <=0:
+	if health <=0 && $Label.visible == false:
 		ScoreManager.score += base_score * WaveManager.wave
 		ScoreManager.score_updated()
 		buff()
+		$Sprite2D.visible = false
+		$Label.visible = true
+		await get_tree().create_timer(1).timeout
 		queue_free()
 	if can_spawn:
 		spawn()
@@ -48,6 +51,7 @@ func _on_hurtbox_area_entered(area):
 func buff():
 	var new_buff = buff_list[randi()%buff_list.size()]
 	var value = randi()%(10) * WaveManager.wave
+	$Label.text = "+" + str(value) + " " + new_buff
 	PlayerStat.apply_buff(new_buff , value)
 
 

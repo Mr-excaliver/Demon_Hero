@@ -12,12 +12,11 @@ collision_mask = 0
 script = ExtResource("1_8sy6s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 1)
 scale = Vector2(1.95313, 1.26562)
 texture = ExtResource("2_od7n2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 0.5)
 shape = SubResource("RectangleShape2D_qmlfn")
 
 [node name="Firerate" type="Timer" parent="."]

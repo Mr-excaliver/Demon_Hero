@@ -1,0 +1,15 @@
+extends Camera2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.enabled = false
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		self.enabled = false
+	else:
+		self.enabled = true

@@ -12,6 +12,7 @@ func _process(delta):
 
 
 func _on_quit_button_down():
+	ScoreManager.save_list()
 	get_tree().quit()
 
 

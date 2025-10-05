@@ -6,18 +6,21 @@ var score = 0
 
 var score_list = []
 
-
-
-
-func score_list_updated():
-	score_list.sort_custom(sort_dec)
+func _ready():
+	load_list()
+	score_list_updated()
+	print(score_list)
 
 func reset():
 	score = 0
 
+func score_list_updated():
+	score_list.sort_custom(Callable(self,"sort_dec"))
+
+
 
 func sort_dec(a,b):
-	return b["score"] - a["score"]
+	return a["score"] > b["score"]
 	
 
 func save_list():
@@ -35,7 +38,8 @@ func load_list():
 	if file:
 		var json_text = file.get_as_text()
 		var parsed_text = JSON.parse_string(json_text)
-		score_list = parsed_text.result
+		if parsed_text:
+			score_list = parsed_text
 
 func score_updated():
 	emit_signal("score_update")

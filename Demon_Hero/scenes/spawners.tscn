@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://jffrh0lqd23i"]
+[gd_scene load_steps=6 format=3 uid="uid://jffrh0lqd23i"]
 
 [ext_resource type="Script" path="res://scripts/spawners.gd" id="1_v3y0p"]
 [ext_resource type="Texture2D" uid="uid://d02o1gqubyxy0" path="res://assests/spawners.png" id="2_r1db8"]
+[ext_resource type="FontFile" uid="uid://bpvbu7mybxpyt" path="res://score/Minecraft.ttf" id="3_0ypmp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gtq73"]
 size = Vector2(128, 128)
@@ -40,5 +41,12 @@ position = Vector2(-300, 0)
 
 [node name="Marker2D4" type="Marker2D" parent="spawnpoints"]
 position = Vector2(300, 0)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_0ypmp")
+theme_override_font_sizes/font_size = 30
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

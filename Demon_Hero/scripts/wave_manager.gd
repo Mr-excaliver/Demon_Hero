@@ -27,14 +27,14 @@ func day():
 	if phase == Phase.DAY:
 		emit_signal("wave_no")
 		var wait_time = 3
-		spawn_points_gen(1)#base_day_spawn * wave)
+		spawn_points_gen(base_day_spawn * wave)
 		var monument_existence = get_tree().get_first_node_in_group("monument")
 		if not monument_existence:
 			var monu = monument.instantiate()
 			monu.global_position = monument_position
 			get_tree().current_scene.add_child(monu)
 		await get_tree().create_timer(1.5).timeout
-		spawned = 1#base_day_spawn * wave
+		spawned = base_day_spawn * wave
 		for i in spawn_points:
 			var enem = enemy.instantiate()
 			enem.global_position = i
@@ -56,7 +56,7 @@ func night():
 			var spaw = spawners.instantiate()
 			spaw.global_position = i
 			get_tree().current_scene.add_child(spaw)
-		await get_tree().create_timer(1 * wave).timeout
+		await get_tree().create_timer(60 * wave).timeout
 		for node in get_tree().get_nodes_in_group("N_enemies"):
 			node.queue_free()
 		for node in get_tree().get_nodes_in_group("Spawners"):
@@ -96,9 +96,10 @@ func day_enemy_died():
 func spawn():
 	var play = player.instantiate()
 	var monu = get_tree().get_first_node_in_group("monument")
-	play.global_position.x = monu.global_position.x
-	play.global_position.y = monu.global_position.y - 250
-	get_tree().current_scene.add_child(play)
+	if monu:
+		play.global_position.x = monu.global_position.x
+		play.global_position.y = monu.global_position.y - 250
+		get_tree().current_scene.add_child(play)
 
 func spawn_points_gen(base):
 	spawn_points.clear()
