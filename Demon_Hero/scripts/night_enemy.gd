@@ -103,7 +103,7 @@ func _on_hurtbox_area_entered(area):
 	if area.has_method("destroy"):
 		area.destroy()
 		health -=PlayerStat.damage
-		WaveManager.shake_initiate(1 , 5 , 2)
+		WaveManager.shake_initiate(1 , 2 , 2)
 
 
 func _on_detector_area_entered(_area):

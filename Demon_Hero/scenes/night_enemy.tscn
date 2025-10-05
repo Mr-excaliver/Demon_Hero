@@ -53,17 +53,17 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhthp"]
-size = Vector2(126, 126)
+[sub_resource type="CircleShape2D" id="CircleShape2D_i8m37"]
+radius = 52.7731
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jy68i"]
-radius = 120.0
+radius = 82.0061
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2n5i6"]
-radius = 120.0
+radius = 81.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_beboc"]
-size = Vector2(124, 128)
+[sub_resource type="CircleShape2D" id="CircleShape2D_fcyfi"]
+radius = 53.0094
 
 [node name="Night_enemy" type="CharacterBody2D"]
 script = ExtResource("1_o243b")
@@ -76,7 +76,7 @@ animation = &"idle"
 frame_progress = 0.043943
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_lhthp")
+shape = SubResource("CircleShape2D_i8m37")
 
 [node name="detector" type="Area2D" parent="."]
 collision_layer = 0
@@ -98,7 +98,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_beboc")
+shape = SubResource("CircleShape2D_fcyfi")
 
 [node name="attack" type="Timer" parent="."]
 wait_time = 0.5

@@ -39,6 +39,7 @@ func shoot():
 			emit_signal("shooting", gun_knockback)
 			get_tree().current_scene.add_child(bullet)
 			current_mag-= 1
+			WaveManager.shake_initiate(1 , 1 , 1)
 			PlayerStat.fired(current_mag)
 			bullet_firerate.start()
 			can_fire = false

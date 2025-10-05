@@ -24,7 +24,7 @@ func _process(_delta):
 func _on_hurtbox_area_entered(area):
 	if area.name == "e_hitbox":
 		health -=EnemyStat.enemy_damage
-		WaveManager.shake_initiate(1 , 8 , 3)
+		WaveManager.shake_initiate(1 , 3 , 3)
 		hurtbox.set_deferred("disabled", true)
 		invinc.start()
 	

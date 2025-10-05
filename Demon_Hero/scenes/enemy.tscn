@@ -53,17 +53,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssa4q"]
-size = Vector2(129, 127)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gw5qi"]
+radius = 57.5022
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ds25d"]
-radius = 120.0
+radius = 94.0479
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3euko"]
-size = Vector2(128, 128)
+[sub_resource type="CircleShape2D" id="CircleShape2D_rd1dk"]
+radius = 59.4138
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amq15"]
-radius = 120.0
+radius = 94.2603
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_j60mk")
@@ -76,14 +76,15 @@ animation = &"idle"
 frame_progress = 0.676721
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -0.5)
-shape = SubResource("RectangleShape2D_ssa4q")
+position = Vector2(3.5, -27.5)
+shape = SubResource("CircleShape2D_gw5qi")
 
 [node name="e_hitbox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="e_hitbox"]
+position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_ds25d")
 disabled = true
 
@@ -92,8 +93,8 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_3euko")
+position = Vector2(3, -29)
+shape = SubResource("CircleShape2D_rd1dk")
 
 [node name="attack" type="Timer" parent="."]
 wait_time = 0.5
@@ -103,6 +104,7 @@ collision_layer = 0
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detector"]
+position = Vector2(1, -22)
 shape = SubResource("CircleShape2D_amq15")
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

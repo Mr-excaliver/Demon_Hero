@@ -59,7 +59,7 @@ func _physics_process(_delta):
 
 func hit():
 	current_health -= EnemyStat.enemy_damage
-	WaveManager.shake_initiate(1 , 10 , 4)
+	WaveManager.shake_initiate(1 , 3 , 4)
 	PlayerStat.player_damaged(current_health)
 	if current_health <= 0:
 		PlayerStat.died_count +=1

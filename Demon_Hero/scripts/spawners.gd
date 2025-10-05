@@ -43,7 +43,7 @@ func spawn():
 func _on_hurtbox_area_entered(area):
 	if area.has_method("destroy"):
 		health -=PlayerStat.damage
-		WaveManager.shake_initiate(1 , 8 , 3)
+		WaveManager.shake_initiate(1 , 3 , 3)
 		area.destroy()
 
 
@@ -51,7 +51,7 @@ func _on_hurtbox_area_entered(area):
 
 func buff():
 	var new_buff = buff_list[randi()%buff_list.size()]
-	var value = randi()%(10) * WaveManager.wave
+	var value = 2 + randi()%(10) * WaveManager.wave
 	$Label.text = "+" + str(value) + " " + new_buff
 	PlayerStat.apply_buff(new_buff , value)
 

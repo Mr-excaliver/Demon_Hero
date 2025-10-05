@@ -5,10 +5,10 @@
 [ext_resource type="FontFile" uid="uid://bpvbu7mybxpyt" path="res://score/Minecraft.ttf" id="3_0ypmp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gtq73"]
-size = Vector2(128, 128)
+size = Vector2(81, 94)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4qs7i"]
-size = Vector2(128, 128)
+size = Vector2(81, 93)
 
 [node name="spawners" type="CharacterBody2D"]
 script = ExtResource("1_v3y0p")
@@ -19,6 +19,7 @@ scale = Vector2(2.46875, 2.9375)
 texture = ExtResource("2_r1db8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 3)
 shape = SubResource("RectangleShape2D_gtq73")
 
 [node name="hurtbox" type="Area2D" parent="."]
@@ -26,6 +27,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_4qs7i")
 
 [node name="spawnpoints" type="Node2D" parent="."]
