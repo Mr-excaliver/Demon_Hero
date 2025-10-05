@@ -25,12 +25,14 @@ func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	monument = get_tree().get_first_node_in_group("monument")
 	self.enemy_died.connect(WaveManager.day_enemy_died)
+	$Sprite2D.play("idle")
 
 
 func _physics_process(delta):
-
+	
 	if health<=0:
 		emit_signal("enemy_died")
+
 		ScoreManager.score += base_score * WaveManager.wave
 		ScoreManager.score_updated()
 		queue_free()
@@ -60,6 +62,10 @@ func chase():
 		else:
 			velocity = speed * (monument.global_position - self.global_position).normalized()
 	
+	if velocity.x < 0:
+		$Sprite2D.flip_h = true
+	else:
+		$Sprite2D.flip_h = false
 
 func idle():
 	velocity = Vector2.ZERO
@@ -94,3 +100,4 @@ func _on_hurtbox_area_entered(area):
 	if area.has_method("destroy"):
 		area.destroy()
 		health -=PlayerStat.damage
+		WaveManager.shake_initiate(1 , 5 , 2)

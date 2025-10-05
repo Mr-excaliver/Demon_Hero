@@ -27,7 +27,7 @@ func _ready():
 	add_to_group("N_enemies")
 	player = get_tree().get_first_node_in_group("player")
 	initial_pos = self.global_position
-
+	$Sprite2D.play("idle")
 
 func _physics_process(_delta):
 	if health<=0:
@@ -54,6 +54,10 @@ func chase():
 	else:
 		if (player.global_position - initial_pos).length() < 600 or (player.global_position - self.global_position).length() < 500:
 			velocity = speed * (player.global_position - self.global_position).normalized()
+			if velocity.x > 0:
+				$Sprite2D.flip_h = true
+			else:
+				$Sprite2D.flip_h = false
 		else :
 			state = State.IDLE
 
@@ -63,6 +67,11 @@ func idle():
 		if self.global_position != initial_pos:
 			self.global_position.x = move_toward(self.global_position.x , initial_pos.x , 5)
 			self.global_position.y = move_toward(self.global_position.y , initial_pos.y , 5)
+			if (self.global_position.x - initial_pos.x)>0:
+				$Sprite2D.flip_h = false
+			else:
+				$Sprite2D.flip_h = true
+			
 	else:
 		if (player.global_position - initial_pos).length() < 600 or (player.global_position - self.global_position).length() < 500:
 			state = State.CHASE
@@ -70,7 +79,10 @@ func idle():
 			if self.global_position != initial_pos:
 				self.global_position.x = move_toward(self.global_position.x , initial_pos.x , 5)
 				self.global_position.y = move_toward(self.global_position.y , initial_pos.y , 5)
-
+				if (self.global_position.x - initial_pos.x)>0:
+					$Sprite2D.flip_h = false
+				else:
+					$Sprite2D.flip_h = true
 
 
 
@@ -91,6 +103,7 @@ func _on_hurtbox_area_entered(area):
 	if area.has_method("destroy"):
 		area.destroy()
 		health -=PlayerStat.damage
+		WaveManager.shake_initiate(1 , 5 , 2)
 
 
 func _on_detector_area_entered(_area):

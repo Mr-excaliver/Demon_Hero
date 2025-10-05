@@ -9,7 +9,6 @@ var score_list = []
 func _ready():
 	load_list()
 	score_list_updated()
-	print(score_list)
 
 func reset():
 	score = 0

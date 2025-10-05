@@ -28,6 +28,7 @@ func _ready():
 	PlayerStat.health_change.connect(health_update)
 	PlayerStat.speed_change.connect(speed_update)
 	self.died.connect(WaveManager.player_died)
+	$Sprite2D.play("idle")
 	
 
 func _physics_process(_delta):
@@ -52,10 +53,13 @@ func _physics_process(_delta):
 			hit()
 	set_velocity(motion)
 	move_and_slide()
+	if velocity.length() < 5:
+		$Sprite2D.play("idle")
 	motion = velocity
 
 func hit():
 	current_health -= EnemyStat.enemy_damage
+	WaveManager.shake_initiate(1 , 10 , 4)
 	PlayerStat.player_damaged(current_health)
 	if current_health <= 0:
 		PlayerStat.died_count +=1
@@ -69,24 +73,31 @@ func movement():
 
 	if Input.is_action_pressed("right") :
 		motion.x = min(MAX_SPEED, motion.x + ACCELERATION)
+		$Sprite2D.flip_h = true
+		$Sprite2D.play("run")
 
 
 	elif Input.is_action_pressed("left"):
 		motion.x = max(-MAX_SPEED, motion.x - ACCELERATION)
+		$Sprite2D.flip_h = false
+		$Sprite2D.play("run")
 
 
 	else:
 		motion.x = lerp(motion.x,0.0,0.2)
 	if Input.is_action_pressed("down") :
 		motion.y = min(MAX_SPEED, motion.y + ACCELERATION)
+		$Sprite2D.play("run")
 
 
 	elif Input.is_action_pressed("up"):
 		motion.y = max(-MAX_SPEED, motion.y - ACCELERATION)
+		$Sprite2D.play("run")
 
 
 	else:
 		motion.y = lerp(motion.y,0.0,0.2)
+
 	
 	if Input.is_action_just_pressed("dash") && can_dash == true:
 		can_dash = false
@@ -97,7 +108,8 @@ func movement():
 		motion.y = motion.y + dash_strength * dash_dir.y
 	elif Input.is_action_just_released("dash"):
 		is_dashing = false
-	
+
+
 	move_and_slide()
 
 

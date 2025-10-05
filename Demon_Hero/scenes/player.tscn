@@ -1,9 +1,107 @@
-[gd_scene load_steps=7 format=3 uid="uid://bprqetcgqfg8m"]
+[gd_scene load_steps=21 format=3 uid="uid://bprqetcgqfg8m"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_oddfl"]
-[ext_resource type="Texture2D" uid="uid://b0u5a8ba7u3hs" path="res://assests/player.png" id="2_fix78"]
+[ext_resource type="Texture2D" uid="uid://ca08u515bo108" path="res://assests/player_idle.png" id="2_81ehb"]
+[ext_resource type="Texture2D" uid="uid://df38uqfgqmomh" path="res://assests/player_run.png" id="3_oghfc"]
 [ext_resource type="PackedScene" uid="uid://b6vit0t28fv84" path="res://scenes/gun.tscn" id="3_x3dc1"]
 [ext_resource type="Texture2D" uid="uid://blfgq8smg1ojg" path="res://assests/arrow.png" id="4_0hp1r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncuwm"]
+atlas = ExtResource("2_81ehb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vle4h"]
+atlas = ExtResource("2_81ehb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyc2n"]
+atlas = ExtResource("2_81ehb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gjvt"]
+atlas = ExtResource("2_81ehb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd86r"]
+atlas = ExtResource("3_oghfc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gquta"]
+atlas = ExtResource("3_oghfc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wwcj"]
+atlas = ExtResource("3_oghfc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_443q5"]
+atlas = ExtResource("3_oghfc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inqch"]
+atlas = ExtResource("3_oghfc")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixo2r"]
+atlas = ExtResource("3_oghfc")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1mvk"]
+atlas = ExtResource("3_oghfc")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5nlx"]
+atlas = ExtResource("3_oghfc")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_853xu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncuwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vle4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyc2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gjvt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd86r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gquta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wwcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_443q5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inqch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixo2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1mvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5nlx")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdm8h"]
 size = Vector2(128, 128)
@@ -14,10 +112,12 @@ size = Vector2(128, 128)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_oddfl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-40, 6.00001)
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 6)
 scale = Vector2(5.875, 4.85937)
-texture = ExtResource("2_fix78")
+sprite_frames = SubResource("SpriteFrames_853xu")
+animation = &"idle"
+frame_progress = 0.2324
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qdm8h")
@@ -35,6 +135,7 @@ shape = SubResource("RectangleShape2D_eamgc")
 process_callback = 0
 
 [node name="gun" parent="." instance=ExtResource("3_x3dc1")]
+position = Vector2(0, 24)
 
 [node name="dashtimer" type="Timer" parent="."]
 wait_time = 0.1

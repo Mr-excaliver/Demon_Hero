@@ -1,6 +1,9 @@
 extends Node
 
 signal wave_no
+signal change_cycle
+signal shake
+
 var wave = 1
 var phase = Phase.IDLE
 var respawn_delay =  5
@@ -56,13 +59,14 @@ func night():
 			var spaw = spawners.instantiate()
 			spaw.global_position = i
 			get_tree().current_scene.add_child(spaw)
-		await get_tree().create_timer(60 * wave).timeout
+		await get_tree().create_timer(20 * wave).timeout
 		for node in get_tree().get_nodes_in_group("N_enemies"):
 			node.queue_free()
 		for node in get_tree().get_nodes_in_group("Spawners"):
 			node.queue_free()
 		
 		phase = Phase.DAY
+		emit_signal("change_cycle")
 		wave+=1
 		day()
 
@@ -90,7 +94,7 @@ func day_enemy_died():
 
 	if spawned ==0:
 		phase = Phase.NIGHT
-
+		emit_signal("change_cycle")
 		night()
 
 func spawn():
@@ -116,3 +120,7 @@ func spawn_points_gen(base):
 func start_game():
 	await get_tree().create_timer(1.5).timeout
 	day()
+	
+func shake_initiate(shake_length , shake_power , shake_priority):
+	emit_signal("shake", shake_length, shake_power , shake_priority)
+
