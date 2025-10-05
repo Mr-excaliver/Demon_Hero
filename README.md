@@ -22,14 +22,19 @@ Score as high as possible and climb the local leaderboard.
 
 **Duality**: This is incorporated by the duality of the player being a hero during the day and a demon during the night.
 
-**loops**: This is incorporated by the gameplay loop that moves from day to night and back again as long as the player can survive.
+**Loops**: This is incorporated by the gameplay loop that moves from day to night and back again as long as the player can survive.
 
 
 # Controls
+
 **MOVE** : WASD
+
 **SHOOT** : Left MB
+
 **AIM** : MOUSE
+
 **DASH** : SPACE BAR
+
 **RELOAD** : R
 
 ## Built with
