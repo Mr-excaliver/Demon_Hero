@@ -17,8 +17,11 @@ The cycle repeats until you die.
 Score as high as possible and climb the local leaderboard.
 
 # Themes Incorporated
+
 **Shadows and Light**: This is incorporated by visual day and night cycle.
+
 **Duality**: This is incorporated by the duality of the player being a hero during the day and a demon during the night.
+
 **loops**: This is incorporated by the gameplay loop that moves from day to night and back again as long as the player can survive.
 
 
@@ -33,7 +36,9 @@ Score as high as possible and climb the local leaderboard.
 Godot Engine 4.2.2v
 
 ## How to run
+
 **To Play** : Run the .exe provided in the Releases folder
+
 **To See The Code** : Demon_hero folder contains all the assests and code of the game. REQUIREMENT - Godot Engine 4.x v
 
 
